@@ -1,55 +1,97 @@
-import { div, section } from "framer-motion/client";
-import { Youtube, Instagram } from "lucide-react";
 import React from "react";
+import { Monitor, Palette, Code, Brain, PenTool, BookOpen } from "lucide-react";
 
 const AboutMe = () => {
-
-    const socialMedia = [
+  const characteristics = [
     {
-      name: "YouTube",
-      icon: <Youtube className="w-5 h-5 text-[#141418] group-hover:text-gray-100 icon-shadow" />,
-      link: "https://www.youtube.com",
-      id: "1",
+      id: "web-developer",
+      title: "Web Developer",
+      icon: (
+        <Monitor className="w-30 h-8 -ml-10 group-hover:text-white text-[#141418] icon-shadow transition-colors duration-300" />
+      ),
+      description:
+        "Me especializo en crear sitios web modernos y responsivos, utilizando tecnologías actuales para ofrecer la mejor experiencia de usuario en diferentes dispositivos.",
     },
-
     {
-        name: "Instagram",
-        icon: <Instagram className="w-5 h-5 text-[#141418] group-hover:text-gray-100 icon-shadow" />,
-        link: "https://www.youtube.com",
-        id: "1",
-      },
-    ]
+      id: "frontend-enthusiast",
+      title: "Frontend Enthusiast",
+      icon: (
+        <Palette className="w-30 h-8 -ml-10 group-hover:text-white text-[#141418] icon-shadow transition-colors duration-300" />
+      ),
+      description:
+        "Me apasiona el diseño y la interacción. Busco crear interfaces intuitivas, atractivas y funcionales con tecnologías como React y Tailwind CSS.",
+    },
+    {
+      id: "clean-code-lover",
+      title: "Lover of Clean Code",
+      icon: (
+        <Code className="w-30 h-8 -ml-10 group-hover:text-white text-[#141418] icon-shadow transition-colors duration-300" />
+      ),
+      description:
+        "Me esfuerzo por escribir código limpio, modular y reutilizable, aplicando buenas prácticas para que sea fácil de mantener y escalar.",
+    },
+    {
+      id: "problem-solver",
+      title: "Problem Solver",
+      icon: (
+        <Brain className="w-30 h-8 -ml-10 group-hover:text-white text-[#141418] icon-shadow transition-colors duration-300" />
+      ),
+      description:
+        "Disfruto enfrentar desafíos y encontrar soluciones creativas a problemas complejos, siempre buscando la mejor manera de optimizar mi código.",
+    },
+    {
+      id: "content-creator",
+      title: "Content Creator",
+      icon: (
+        <PenTool className="w-30 h-8 -ml-10 group-hover:text-white text-[#141418] icon-shadow transition-colors duration-300" />
+      ),
+      description:
+        "Comparto mi aprendizaje y experiencias en programación a través de contenido educativo, ayudando a otros a mejorar sus habilidades.",
+    },
+    {
+      id: "always-learning",
+      title: "Always Learning",
+      icon: (
+        <BookOpen className="w-30 h-8 -ml-10 group-hover:text-white text-[#141418] icon-shadow transition-colors duration-300" />
+      ),
+      description:
+        "Estoy en constante aprendizaje, manteniéndome actualizado con nuevas tecnologías y tendencias para mejorar mis habilidades y conocimientos.",
+    },
+  ];
 
   return (
-    <section>
-      <div className="flex-col justify-center items-center content-center text-center p-3 m-3">
-        <p className="text-[#141418] text-shadow font-bold">
-          Soy un desarrollador <strong className="text-white">Frontend </strong>
-          apasionado por la{" "}
-          <strong className="text-white">tecnología y el diseño web.</strong> Me
-          encanta construir{" "}
-          <strong className="text-white">
-            experiencias digitales atractivas y funcionales.{" "}
-          </strong>
-          Además, comparto mi conocimiento en{" "}
-          <strong className="text-white">"CódigoBambu"</strong> , donde creo
-          contenido educativo sobre{" "}
-          <strong className="text-white">programación y desarrollo web.</strong>
-        </p>
-      </div>
-      <div>
-        {socialMedia.map((item, id) => {
-            return (
-                <a
-                key={id}
-                href={item.link}
-                className="text-[#141418] text-shadow font-bold hover:text-gray-100 transition-colors duration-300 flex items-center gap-2 group"
-                >
-                {item.icon}
-                {item.name}
-                </a>
-            );º
-        })}
+    <section className="py-6 px-5 mb-10" id="aboutme">
+      <h2 className="text-3xl font-bold text-shadow text-[#141418] mb-3 text-center">
+        Sobre Mí
+      </h2>
+      <p className="text-[#141418] text-shadow font-bold text-center my-5 ">
+        Soy un desarrollador <strong className="text-white">Frontend</strong>{" "}
+        apasionado por la{" "}
+        <strong className="text-white">tecnología y el diseño web.</strong> Me
+        encanta construir{" "}
+        <strong className="text-white">
+          experiencias digitales atractivas y funcionales.
+        </strong>{" "}
+        Además, comparto mi conocimiento en{" "}
+        <strong className="text-white">"CódigoBambu"</strong>, donde creo
+        contenido educativo sobre{" "}
+        <strong className="text-white">programación y desarrollo web.</strong>{" "}
+        Aquí te muestro lo que <strong className="text-white">Ofrezco:</strong>
+      </p>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 text-shadow">
+        {characteristics.map((char) => (
+          <div
+            key={char.id}
+            className="p-4 border rounded-lg flex-col shadow-md backdrop-blur-2xl bg-transparent box-shadow flex items-start gap-2 
+                       hover:scale-102 hover:text-white hover:shadow-lg hover:text-shadow-lg cursor-pointer transition-all duration-500 text-[#141418] group"
+          >
+            {char.icon}
+            <div>
+              <h3 className="text-lg mb-1 font-semibold">{char.title}</h3>
+              <p className="text-sm font-semibold ">{char.description}</p>
+            </div>
+          </div>
+        ))}
       </div>
     </section>
   );

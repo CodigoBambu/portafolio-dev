@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Menu, X, Code, Monitor, User, Home, Mail, Leaf } from "lucide-react"; 
+import { Menu, X, Code, Monitor, User, Home, Mail, Leaf } from "lucide-react";
 import Logo from "./Logo";
 
 const Navbar = () => {
@@ -47,20 +47,23 @@ const Navbar = () => {
 
   const menuItems = [
     {
-      name: "Home",
+      id: "inicio",
+      name: "Inicio",
       icon: (
         <Home className="w-5 h-5 text-[#141418] group-hover:text-gray-100 icon-shadow" />
       ),
-      link: "/",
+      link: "/#hero",
     },
     {
-      name: "Projects",
+      id: "sobre mi",
+      name: "Sobre Mi",
       icon: (
         <Code className="w-5 h-5 text-[#141418] group-hover:text-gray-100 icon-shadow" />
       ),
-      link: "/#projects",
+      link: "/#aboutme",
     },
     {
+      id: "skills",
       name: "Skills",
       icon: (
         <Monitor className="w-5 h-5 text-[#141418] group-hover:text-gray-100 icon-shadow" />
@@ -68,13 +71,15 @@ const Navbar = () => {
       link: "/#skills",
     },
     {
-      name: "About",
+      id: "proyectos",
+      name: "Proyectos",
       icon: (
         <User className="w-5 h-5 text-[#141418] group-hover:text-gray-100 icon-shadow" />
       ),
       link: "/#about",
     },
     {
+      id: "contact",
       name: "Contact",
       icon: (
         <Mail className="w-5 h-5 text-[#141418] group-hover:text-gray-100 icon-shadow" />
@@ -94,12 +99,12 @@ const Navbar = () => {
 
         {/* Desktop Menu */}
         <div className="hidden md:flex items-center space-x-8">
-          {menuItems.map((item, index) => (
+          {menuItems.map((item) => (
             <motion.div
-              key={item.name}
+              key={item.id}
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.1, duration: 0.5 }}
+              transition={{ delay: 0.1, duration: 0.5 }}
             >
               <a
                 href={item.link}
@@ -119,7 +124,11 @@ const Navbar = () => {
             className=" text-[#141418]"
             aria-label={isOpen ? "Close menu" : "Open menu"}
           >
-            {isOpen ? <X className="w-7 h-7 icon-shadow text-[#1414118] font-extrabold" /> : <Menu className="w-7 h-7 icon-shadow" />}
+            {isOpen ? (
+              <X className="w-7 h-7 icon-shadow text-[#1414118] font-extrabold" />
+            ) : (
+              <Menu className="w-7 h-7 icon-shadow" />
+            )}
           </button>
         </div>
       </div>
@@ -150,23 +159,26 @@ const Navbar = () => {
         className="md:hidden overflow-hidden text-[#141418] text-shadow font-extrabold backdrop-blur-[5px]"
       >
         <div className="flex flex-col items-center px-4 py-2 space-y-4">
-          {menuItems.map((item, i) => (
+          {menuItems.map((item) => (
             <motion.div
-              key={item.name}
-              custom={i}
+              key={item.id}
+              custom={item.id}
               variants={navItemVariants}
-              className="flex flex-col items-center"
+              className="w-full"
             >
-              <a
-                href={item.link}
-                className="py-4 flex items-center gap-2 group"
-                onClick={() => setIsOpen(false)}
+              <div
+                className="py-4 flex items-center justify-center gap-2 w-full cursor-pointer"
+                onClick={() => {
+                  setIsOpen(false);
+                  window.location.href = item.link;
+                }}
               >
                 {React.cloneElement(item.icon, {
-                  className: "w-6 h-6 group-hover:text-blue-500 icon-shadow text-[#1414118] ",
+                  className:
+                    "w-6 h-6 group-hover:text-blue-500 icon-shadow text-[#1414118]",
                 })}
                 <span>{item.name}</span>
-              </a>
+              </div>
             </motion.div>
           ))}
         </div>

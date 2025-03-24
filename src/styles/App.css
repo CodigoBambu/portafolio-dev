@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+/* Global Styles */
+
 html,
 body {
   overflow-x: hidden;
@@ -20,7 +22,48 @@ body {
   position: relative;
   height: 100%;
   width: 100%;
-  background-color: #0e0e0e;
+  background-color: #0f0f0f;
+}
+
+header {
+  background-image: url(../assets/bg-header.webp);
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  height: 100vh;
+}
+
+header::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.363);
+  z-index: 1;
+}
+
+/* Buttons */
+
+.btn {
+  box-shadow: 0 0 15px rgba(190, 190, 190, 0.8),
+    0 0 20px rgba(131, 131, 131, 0.6), 0 0 25px rgba(102, 102, 102, 0.4),
+    0 0 30px rgba(94, 94, 94, 0.4);
+  transition: all 0.5s;
+  backdrop-filter: blur(5px);
+}
+
+.btn:hover {
+  cursor: pointer;
+  background: #262635d0;
+  box-shadow: 0 0 5px rgba(190, 190, 190, 0.8),
+    0 0 10px rgba(131, 131, 131, 0.6), 0 0 15px rgba(102, 102, 102, 0.4),
+    0 0 20px rgba(94, 94, 94, 0.4);
+  transform: scale(1.08);
+  color: #000;
+  font-weight: 800;
 }
 
 /* Scroll */
@@ -111,6 +154,8 @@ html.has-scroll-dragging {
   bottom: 0;
 }
 
+/* Shadows */
+
 .text-shadow {
   text-shadow: 0 0 5px rgb(218, 218, 218), 0 0 10px rgb(187, 187, 187),
     0 0 15px rgb(145, 145, 145), 0 0 20px rgb(131, 131, 131);
@@ -125,43 +170,4 @@ html.has-scroll-dragging {
   filter: drop-shadow(0 0 2px rgb(218, 218, 218))
     drop-shadow(0 0 8px rgb(187, 187, 187))
     drop-shadow(0 0 10px rgb(145, 145, 145));
-}
-
-header {
-  background-image: url(../assets/bg-header.webp);
-  background-size: cover;
-  background-position: center top;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  height: 100vh;
-}
-
-header::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.363);
-  z-index: 1;
-}
-
-.btn {
-  box-shadow: 0 0 15px rgba(190, 190, 190, 0.8),
-    0 0 20px rgba(131, 131, 131, 0.6), 0 0 25px rgba(102, 102, 102, 0.4),
-    0 0 30px rgba(94, 94, 94, 0.4);
-  transition: all 0.5s;
-  backdrop-filter: blur(5px);
-}
-
-.btn:hover {
-  cursor: pointer;
-  background: #262635d0;
-  box-shadow: 0 0 5px rgba(190, 190, 190, 0.8),
-    0 0 10px rgba(131, 131, 131, 0.6), 0 0 15px rgba(102, 102, 102, 0.4),
-    0 0 20px rgba(94, 94, 94, 0.4);
-  transform: scale(1.08);
-  color: #000;
-  font-weight: 800;
 }

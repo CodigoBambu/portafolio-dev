@@ -6,16 +6,14 @@ import React from "react";
 
 const Hero = () => {
   const handleClick = () => {
-    // Aquí puedes realizar la acción que desees
-    console.log("¡Botón clickeado en Hero!"); // Por ejemplo, puedes hacer un console.log
-    // O realizar otra acción, como redirigir a otra página, abrir un modal, etc.
+    console.log("¡Botón clickeado en Hero!");
   };
   return (
-    <header>
-      <section className="z-10">
+    <header id="hero" className="relative z-10">
+      <section className="relative z-10">
         <Navbar />
-        <div className="flex items-center justify-center content-center z-20">
-          <span className="inline-block border-transparent text-shadow z-20 text-[#141418] font-extrabold backdrop-blur-md bg-gray-800/60 px-3 py-1 text-sm rounded-full border mt-24 box-shadow">
+        <div className="flex items-center justify-center content-center z-20 hover:scale-[1.05] transition-all duration-500">
+          <span className="inline-block border-transparent text-shadow z-20 text-[#141418] font-extrabold backdrop-blur-md bg-gray-500/50 hover:bg-gray-800/50 cursor-pointer hover:text-white transition-all duration-500 px-3 py-1 text-sm rounded-full border mt-24 box-shadow">
             &lt; Frontend Developer /&gt;
           </span>
         </div>
@@ -34,13 +32,13 @@ const Hero = () => {
             text="Proyectos"
             onClick={handleClick}
             href="https://www.google.com"
-            className="btn text-[#141418] text-shadow z-20 box-shadow items-center justify-center content-center bg-transparent w-48" 
+            className="btn text-[#141418] text-shadow z-20 box-shadow items-center justify-center content-center bg-transparent w-48"
           />
           <Button
             text="Contáctame"
             onClick={handleClick}
             href="https://www.google.com"
-            className="btn text-[#141418] text-shadow z-20 box-shadow items-center justify-center content-center bg-transparent" 
+            className="btn text-[#141418] text-shadow z-20 box-shadow items-center justify-center content-center bg-transparent"
           />
         </div>
       </section>
