@@ -1,188 +1,107 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
-import { Menu, X, Code, Monitor, User, Home, Mail, Leaf } from "lucide-react";
-import Logo from "./Logo";
+import { Code, Monitor, User, Home, Mail } from "lucide-react";
 
 const Navbar = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
+  const [activeSection, setActiveSection] = useState("hero");
+  const sectionRefs = {
+    hero: useRef(null),
+    aboutme: useRef(null),
+    skills: useRef(null),
+    about: useRef(null),
+    contact: useRef(null),
+  };
 
   useEffect(() => {
     const handleScroll = () => {
-      const offset = window.scrollY;
-      if (offset > 50) {
-        setScrolled(true);
-      } else {
-        setScrolled(false);
+      checkActiveSection();
+    };
+
+    const checkActiveSection = () => {
+      for (const sectionId in sectionRefs) {
+        const section = sectionRefs[sectionId].current;
+        if (section) {
+          const rect = section.getBoundingClientRect();
+          if (rect.top <= 100 && rect.bottom >= 100) {
+            setActiveSection(sectionId);
+            break;
+          }
+        }
       }
     };
 
     window.addEventListener("scroll", handleScroll);
+    checkActiveSection();
+
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
-  const toggleMenu = () => {
-    setIsOpen(!isOpen);
-  };
-
-  const navbarClasses = `fixed w-full z-50 transition-all duration-300 ${
-    scrolled ? "py-3 backdrop-blur-[5px] box-shadow" : "py-5 "
-  }`;
-
-  const navItemVariants = {
-    closed: { opacity: 0, y: 20 },
-    open: (i) => ({
-      opacity: 1,
-      y: 0,
-      transition: {
-        delay: 0.1 + i * 0.1,
-        duration: 0.5,
-        ease: [0.22, 1, 0.36, 1],
-      },
-    }),
-  };
-
   const menuItems = [
     {
       id: "inicio",
-      name: "Inicio",
-      icon: (
-        <Home className="w-5 h-5 text-[#141418] group-hover:text-gray-100 icon-shadow" />
-      ),
+      icon: <Home />,
       link: "/#hero",
+      sectionId: "hero",
     },
     {
       id: "sobre mi",
-      name: "Sobre Mi",
-      icon: (
-        <Code className="w-5 h-5 text-[#141418] group-hover:text-gray-100 icon-shadow" />
-      ),
+      icon: <User />,
       link: "/#aboutme",
+      sectionId: "aboutme",
     },
     {
       id: "skills",
-      name: "Skills",
-      icon: (
-        <Monitor className="w-5 h-5 text-[#141418] group-hover:text-gray-100 icon-shadow" />
-      ),
+      icon: <Monitor />,
       link: "/#skills",
+      sectionId: "skills",
     },
     {
       id: "proyectos",
-      name: "Proyectos",
-      icon: (
-        <User className="w-5 h-5 text-[#141418] group-hover:text-gray-100 icon-shadow" />
-      ),
+      icon: <Code />,
       link: "/#about",
+      sectionId: "about",
     },
     {
       id: "contact",
-      name: "Contact",
-      icon: (
-        <Mail className="w-5 h-5 text-[#141418] group-hover:text-gray-100 icon-shadow" />
-      ),
+      icon: <Mail />,
       link: "/#contact",
+      sectionId: "contact",
     },
   ];
 
   return (
-    <nav className={navbarClasses}>
-      <div className="flex justify-between items-center w-full px-4">
-        <Logo
-          icon={
-            <Leaf className="w-6 h-6 text-[#141418] group-hover:text-gray-100 icon-shadow transition-colors duration-300 cursor-pointer" />
-          }
-        />
+    <nav className="fixed bottom-0 w-full backdrop-blur-[2px] box-shadow flex justify-around py-4 z-100 md:right-0 md:top-1/2 md:transform md:-translate-y-1/2 md:w-10 md:h-80 md:rounded-tl-3xl md:rounded-bl-3xl md:flex-col">
+      {menuItems.map((item) => (
+        <Link
+          key={item.id}
+          to={item.link}
+          className="flex items-center justify-center"
+        >
+          {React.cloneElement(item.icon, {
+            className:
+              item.sectionId === activeSection
+                ? "w-6 h-6 text-white icon-shadow md:ml-1"
+                : "w-6 h-6 text-[#141418] icon-shadow hover:scale-120 hover:text-white transition-all duration-500 md:ml-1",
+          })}
+        </Link>
+      ))}
 
-        {/* Desktop Menu */}
-        <div className="hidden md:flex items-center space-x-8">
-          {menuItems.map((item) => (
-            <motion.div
-              key={item.id}
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1, duration: 0.5 }}
-            >
-              <a
-                href={item.link}
-                className="text-[#141418] text-shadow font-extrabold hover:text-gray-100 transition-colors duration-300 flex items-center gap-2 group"
-              >
-                {item.icon}
-                {item.name}
-              </a>
-            </motion.div>
-          ))}
-        </div>
-
-        {/* Mobile Menu Button */}
-        <div className="md:hidden flex items-center gap-2">
-          <button
-            onClick={toggleMenu}
-            className=" text-[#141418]"
-            aria-label={isOpen ? "Close menu" : "Open menu"}
-          >
-            {isOpen ? (
-              <X className="w-7 h-7 icon-shadow text-[#1414118] font-extrabold" />
-            ) : (
-              <Menu className="w-7 h-7 icon-shadow" />
-            )}
-          </button>
-        </div>
-      </div>
-
-      {/* Mobile Menu */}
-      <motion.div
-        initial={false}
-        animate={isOpen ? "open" : "closed"}
-        variants={{
-          open: {
-            height: "auto",
-            opacity: 1,
-            transition: {
-              duration: 0.5,
-              staggerChildren: 0.1,
-            },
-          },
-          closed: {
-            height: 0,
-            opacity: 0,
-            transition: {
-              duration: 0.5,
-              staggerChildren: 0.05,
-              staggerDirection: -1,
-            },
-          },
-        }}
-        className="md:hidden overflow-hidden text-[#141418] text-shadow font-extrabold backdrop-blur-[5px]"
-      >
-        <div className="flex flex-col items-center px-4 py-2 space-y-4">
-          {menuItems.map((item) => (
-            <motion.div
-              key={item.id}
-              custom={item.id}
-              variants={navItemVariants}
-              className="w-full"
-            >
-              <div
-                className="py-4 flex items-center justify-center gap-2 w-full cursor-pointer"
-                onClick={() => {
-                  setIsOpen(false);
-                  window.location.href = item.link;
-                }}
-              >
-                {React.cloneElement(item.icon, {
-                  className:
-                    "w-6 h-6 group-hover:text-blue-500 icon-shadow text-[#1414118]",
-                })}
-                <span>{item.name}</span>
-              </div>
-            </motion.div>
-          ))}
-        </div>
-      </motion.div>
+      {Object.keys(sectionRefs).map((sectionId) => (
+        <div
+          key={sectionId}
+          ref={sectionRefs[sectionId]}
+          id={sectionId}
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: "1px",
+            height: "1px",
+          }}
+        ></div>
+      ))}
     </nav>
   );
 };
