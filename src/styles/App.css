@@ -26,23 +26,26 @@ body {
 }
 
 header {
-  background-image: url(../assets/bg-header.webp);
-  background-size: cover;
-  background-position: center top;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
   height: 100vh;
+  position: relative;
+  overflow: hidden;
 }
 
-header::before {
-  content: "";
+.background {
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
+  right: 0;
+  bottom: 0;
+  z-index: -10;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.562);
-  z-index: 1;
+  width: 100%;
+  padding: 24px 5px;
+  background: radial-gradient(
+    125% 125% at 50% 10%,
+    #080808 40%,
+    rgba(255, 255, 255, 0.616) 100%
+  );
 }
 
 /* Buttons */

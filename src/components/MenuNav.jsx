@@ -1,83 +1,61 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Code, Monitor, User, Home, Mail } from "lucide-react";
 
-const Navbar = () => {
+const Navbar = ({ onNavigate }) => {
   const [activeSection, setActiveSection] = useState("hero");
-  const sectionRefs = {
-    hero: useRef(null),
-    aboutme: useRef(null),
-    skills: useRef(null),
-    about: useRef(null),
-    contact: useRef(null),
-  };
-
-  useEffect(() => {
-    const handleScroll = () => {
-      checkActiveSection();
-    };
-
-    const checkActiveSection = () => {
-      for (const sectionId in sectionRefs) {
-        const section = sectionRefs[sectionId].current;
-        if (section) {
-          const rect = section.getBoundingClientRect();
-          if (rect.top <= 100 && rect.bottom >= 100) {
-            setActiveSection(sectionId);
-            break;
-          }
-        }
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    checkActiveSection();
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
 
   const menuItems = [
     {
       id: "inicio",
       icon: <Home />,
-      link: "/#hero",
+      link: "/",
       sectionId: "hero",
+      tooltip: "Inicio",
     },
     {
       id: "sobre mi",
       icon: <User />,
-      link: "/#aboutme",
+      link: "/aboutme",
       sectionId: "aboutme",
+      tooltip: "Sobre mí",
     },
     {
       id: "skills",
       icon: <Monitor />,
-      link: "/#skills",
+      link: "/skills",
       sectionId: "skills",
+      tooltip: "Habilidades",
     },
     {
       id: "proyectos",
       icon: <Code />,
-      link: "/#about",
+      link: "/about",
       sectionId: "about",
+      tooltip: "Proyectos",
     },
     {
       id: "contact",
       icon: <Mail />,
-      link: "/#contact",
+      link: "/contact",
       sectionId: "contact",
+      tooltip: "Contacto",
     },
   ];
+
+  const handleLinkClick = (sectionId, path) => {
+    setActiveSection(sectionId);
+    onNavigate(path);
+  };
 
   return (
     <nav className="fixed bottom-0 w-full backdrop-blur-[2px] box-shadow flex justify-around py-4 z-100 md:right-0 md:top-1/2 md:transform md:-translate-y-1/2 md:w-10 md:h-80 md:rounded-tl-3xl md:rounded-bl-3xl md:flex-col">
       {menuItems.map((item) => (
-        <Link
+        <button
           key={item.id}
-          to={item.link}
           className="flex items-center justify-center"
+          title={item.tooltip}
+          onClick={() => handleLinkClick(item.sectionId, item.link)}
         >
           {React.cloneElement(item.icon, {
             className:
@@ -85,22 +63,7 @@ const Navbar = () => {
                 ? "w-6 h-6 text-white icon-shadow md:ml-1"
                 : "w-6 h-6 text-[#141418] icon-shadow hover:scale-120 hover:text-white transition-all duration-500 md:ml-1",
           })}
-        </Link>
-      ))}
-
-      {Object.keys(sectionRefs).map((sectionId) => (
-        <div
-          key={sectionId}
-          ref={sectionRefs[sectionId]}
-          id={sectionId}
-          style={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            width: "1px",
-            height: "1px",
-          }}
-        ></div>
+        </button>
       ))}
     </nav>
   );

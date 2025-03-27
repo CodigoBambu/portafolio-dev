@@ -62,6 +62,7 @@ const Hero = () => {
   ];
   return (
     <header id="hero" className="relative z-10">
+      <div className="background"></div>
       <section className="relative z-10">
         <Navbar />
         <div className="w-full flex justify-center items-center md:w-80">

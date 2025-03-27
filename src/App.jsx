@@ -1,14 +1,57 @@
-import React from "react";
-import "./styles/App.css";
-import { BrowserRouter } from "react-router-dom";
+import React, { useState } from "react";
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  useLocation,
+  useNavigate,
+} from "react-router-dom";
+import { AnimatePresence } from "framer-motion";
 import Hero from "./sections/Hero";
+import AboutMe from "./sections/AboutMe";
+import Navbar from "./components/MenuNav";
+import Transition from "./components/Transition";
 
-function App() {
+function AppWrapper() {
   return (
     <BrowserRouter>
-      <Hero />
+      <App />
     </BrowserRouter>
   );
 }
 
-export default App;
+function App() {
+  const [showTransition, setShowTransition] = useState(false);
+  const [nextRoute, setNextRoute] = useState(null);
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const handleNavigation = (path) => {
+    setShowTransition(true);
+    setNextRoute(path);
+  };
+
+  return (
+    <div>
+      <Navbar onNavigate={handleNavigation} />
+
+      <AnimatePresence mode="wait">
+        {showTransition && (
+          <Transition
+            onAnimationEnd={() => {
+              setShowTransition(false);
+              if (nextRoute) navigate(nextRoute);
+            }}
+          />
+        )}
+      </AnimatePresence>
+
+      <Routes location={location} key={location.pathname}>
+        <Route path="/" element={<Hero />} />
+        <Route path="/aboutme" element={<AboutMe />} />
+      </Routes>
+    </div>
+  );
+}
+
+export default AppWrapper;
