@@ -1,9 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
-import Navbar from "../components/MenuNav";
 import Logo from "../components/Logo";
 import SocialMediaLinks from "../components/SocialMedia";
-import LavaBackground from "../components/LavaBackground";
+import ParticlesBackground from "../components/ParticlesBackground";
 
 const Hero = () => {
   const [text1, setText1] = useState("");
@@ -69,10 +68,8 @@ const Hero = () => {
   }, []);
 
   return (
-    <header id="hero" className="relative z-10 content-center md:-mt-10">
-      <LavaBackground />
-      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"></div>
-      <Navbar />
+    <header id="hero" className="relative z-10 py-10" >
+      <ParticlesBackground />
       <motion.section
         className="relative z-10"
         initial={{ opacity: 0, y: 20 }}
@@ -83,7 +80,7 @@ const Hero = () => {
           <Logo />
         </div>
         <SocialMediaLinks />
-        <div className="flex items-center justify-center content-center z-20 transition-all duration-500 md:mt-10">
+        <div className="flex items-center justify-center content-center z-20 transition-all duration-500 md:mt-15">
           <motion.span
             ref={textRef}
             className="inline-block border-transparent text-shadow z-20 text-[#141418] hover:scale-[1.05] font-extrabold backdrop-blur-md bg-gray-500/50 hover:bg-gray-800/50 cursor-pointer hover:text-white transition-all duration-500 px-3 py-1 text-sm rounded-full border mt-10 mb-6 box-shadow"
@@ -98,7 +95,7 @@ const Hero = () => {
           <span>{text1}</span>
           <strong className="text-white">{text2}</strong>
         </h1>
-        <p className="text-center z-20 text-[#141418] text-shadow font-semibold relative md:max-w-2xl md:text-center md:mx-auto">
+        <p className="text-center z-20 text-[#141418] text-shadow font-semibold relative md:max-w-2xl md:text-center md:mx-auto md:text-xl">
           Construyo aplicaciones
           <strong className="text-white"> Web Modernas </strong>con{" "}
           <strong className="text-white">Tecnología de Punta</strong> y diseño

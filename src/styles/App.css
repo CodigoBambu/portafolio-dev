@@ -31,23 +31,6 @@ header {
   overflow: hidden;
 }
 
-.background {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: -10;
-  height: 100%;
-  width: 100%;
-  padding: 24px 5px;
-  background: radial-gradient(
-    125% 125% at 50% 10%,
-    #080808 40%,
-    rgba(255, 255, 255, 0.616) 100%
-  );
-}
-
 /* Buttons */
 
 .button::before {

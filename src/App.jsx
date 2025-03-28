@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   BrowserRouter,
   Routes,
@@ -9,48 +9,64 @@ import {
 import { AnimatePresence } from "framer-motion";
 import Hero from "./sections/Hero";
 import AboutMe from "./sections/AboutMe";
-import Navbar from "./components/MenuNav";
+import SideMenu from "./components/MenuSide";
 import Transition from "./components/Transition";
-
-function AppWrapper() {
-  return (
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
-  );
-}
+import LoadingScreen from "./components/LoadingScreen";
 
 function App() {
   const [showTransition, setShowTransition] = useState(false);
   const [nextRoute, setNextRoute] = useState(null);
   const navigate = useNavigate();
   const location = useLocation();
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 5000);
+
+    return () => clearTimeout(timer);
+  }, []);
 
   const handleNavigation = (path) => {
     setShowTransition(true);
     setNextRoute(path);
   };
 
+  if (isLoading) {
+    return <LoadingScreen onLoadingComplete={() => setIsLoading(false)} />;
+  }
+
   return (
-    <div>
-      <Navbar onNavigate={handleNavigation} />
+    <div className="flex">
+      <SideMenu onNavigate={handleNavigation} />
 
-      <AnimatePresence mode="wait">
-        {showTransition && (
-          <Transition
-            onAnimationEnd={() => {
-              setShowTransition(false);
-              if (nextRoute) navigate(nextRoute);
-            }}
-          />
-        )}
-      </AnimatePresence>
+      <div className="flex-1">
+        <AnimatePresence mode="wait">
+          {showTransition && (
+            <Transition
+              onAnimationEnd={() => {
+                setShowTransition(false);
+                if (nextRoute) navigate(nextRoute);
+              }}
+            />
+          )}
+        </AnimatePresence>
 
-      <Routes location={location} key={location.pathname}>
-        <Route path="/" element={<Hero />} />
-        <Route path="/aboutme" element={<AboutMe />} />
-      </Routes>
+        <Routes location={location} key={location.pathname}>
+          <Route path="/" element={<Hero />} />
+          <Route path="/aboutme" element={<AboutMe />} />
+        </Routes>
+      </div>
     </div>
+  );
+}
+
+function AppWrapper() {
+  return (
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
   );
 }
 

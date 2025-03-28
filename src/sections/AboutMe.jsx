@@ -60,7 +60,7 @@ const AboutMe = () => {
   ];
 
   return (
-    <section className="py-6 px-5 mb-10" id="aboutm">
+    <section className="py-6 px-5 mb-10" id="aboutme">
       <h2 className="text-3xl font-bold text-shadow text-[#141418] mb-3 text-center">
         Sobre Mí
       </h2>
