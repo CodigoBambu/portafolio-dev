@@ -60,8 +60,8 @@ const Navbar = ({ onNavigate }) => {
           {React.cloneElement(item.icon, {
             className:
               item.sectionId === activeSection
-                ? "w-6 h-6 text-white icon-shadow md:ml-1"
-                : "w-6 h-6 text-[#141418] icon-shadow hover:scale-120 hover:text-white transition-all duration-500 md:ml-1",
+                ? "w-6 h-6 text-white icon-shadow md:ml-1 cursor-pointer"
+                : "w-6 h-6 text-[#141418] icon-shadow hover:scale-120 hover:text-white transition-all duration-500 md:ml-1 cursor-pointer",
           })}
         </button>
       ))}
