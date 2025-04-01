@@ -41,11 +41,11 @@ const SideMenu = ({ onNavigate }) => {
       tooltip: "Sobre mí",
     },
     {
-      id: "skills",
+      id: "servicios",
       icon: <Monitor />,
-      link: "/skills",
-      sectionId: "skills",
-      tooltip: "Habilidades",
+      link: "/service",
+      sectionId: "services",
+      tooltip: "Servicios",
     },
     {
       id: "proyectos",
@@ -77,8 +77,8 @@ const SideMenu = ({ onNavigate }) => {
       onClick={isMobile ? () => setIsOpen(!isOpen) : undefined}
     >
       <nav
-        className={`fixed w-10 h-5/6 rounded-l-2xl -right-1 top-1/2 transform -translate-y-1/2 transition-transform duration-300 ${
-          isOpen ? "translate-x-0" : "translate-x-full"
+        className={`fixed w-10 h-5/6 rounded-l-2xl -right-2 top-1/2 transform -translate-y-1/2 transition-transform duration-300 z-100 ${
+          isOpen ? "translate-x-[-8px]" : "translate-x-15"
         } backdrop-blur-[2px] box-shadow flex flex-col justify-around py-4 md:w-10 md:h-80 md:rounded-tl-3xl md:rounded-bl-3xl`}
         onClick={() => setIsOpen(false)}
       >
@@ -93,16 +93,16 @@ const SideMenu = ({ onNavigate }) => {
               className:
                 item.sectionId === activeSection
                   ? "w-6 h-6 text-white icon-shadow cursor-pointer"
-                  : "w-6 h-6 text-[#141418] icon-shadow hover:scale-120 hover:text-white transition-all duration-500 cursor-pointer",
+                  : "w-6 h-6 text-[#141418] icon-shadow hover:scale-120 transition-all duration-500 cursor-pointer",
             })}
           </button>
         ))}
       </nav>
-
       <button
         className={`bg-transparent cursor-pointer box-shadow h-20 rounded-l-xl shadow-lg fixed top-1/2 transform -translate-y-1/2 transition-all duration-300 ${
-          isOpen ? "right-[42px]" : "right-0"
+          isOpen ? "right-[45px]" : "right-0"
         } hover:scale-110`}
+        style={{ marginRight: isOpen ? "-2px" : "-2px" }}
       >
         {isOpen ? (
           <ChevronRight className="w-6 h-6 text-gray-800 icon-shadow" />

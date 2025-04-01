@@ -12,6 +12,7 @@ import AboutMe from "./sections/AboutMe";
 import SideMenu from "./components/MenuSide";
 import Transition from "./components/Transition";
 import LoadingScreen from "./components/LoadingScreen";
+import Services from "./sections/Services"
 
 function App() {
   const [showTransition, setShowTransition] = useState(false);
@@ -40,7 +41,6 @@ function App() {
   return (
     <div className="flex">
       <SideMenu onNavigate={handleNavigation} />
-
       <div className="flex-1">
         <AnimatePresence mode="wait">
           {showTransition && (
@@ -56,6 +56,7 @@ function App() {
         <Routes location={location} key={location.pathname}>
           <Route path="/" element={<Hero />} />
           <Route path="/aboutme" element={<AboutMe />} />
+          <Route path="/service" element={<Services />} />
         </Routes>
       </div>
     </div>

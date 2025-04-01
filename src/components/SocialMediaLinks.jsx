@@ -34,7 +34,7 @@ const SocialMediaLinks = () => {
     {
       id: "instagram",
       icon: (
-        <Instagram className="w-5 h-5 text-[#141418]e icon-shadow md:w-6 md:h-6 hover:scale-120 hover:text-white transition-all duration-500" />
+        <Instagram className="w-5 h-5 text-[#141418] icon-shadow md:w-6 md:h-6 hover:scale-120 hover:text-white transition-all duration-500" />
       ),
       link: "#",
     },

@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
-import Logo from "../components/Logo";
-import SocialMediaLinks from "../components/SocialMedia";
 import ParticlesBackground from "../components/ParticlesBackground";
+import Logo from "../components/Logo";
+import SocialMediaLinks from "../components/SocialMediaLinks";
 
 const Hero = () => {
   const [text1, setText1] = useState("");
@@ -68,18 +68,18 @@ const Hero = () => {
   }, []);
 
   return (
-    <header id="hero" className="relative z-10 py-10" >
+    <header id="hero" className="relative z-10 py-10">
       <ParticlesBackground />
+      <div className="w-full flex justify-center items-center md:w-80">
+        <Logo />
+      </div>
+      <SocialMediaLinks />
       <motion.section
         className="relative z-10"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1.5, ease: "easeOut" }}
       >
-        <div className="w-full flex justify-center items-center md:w-80">
-          <Logo />
-        </div>
-        <SocialMediaLinks />
         <div className="flex items-center justify-center content-center z-20 transition-all duration-500 md:mt-15">
           <motion.span
             ref={textRef}
