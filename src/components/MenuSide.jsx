@@ -93,7 +93,7 @@ const SideMenu = ({ onNavigate }) => {
               className:
                 item.sectionId === activeSection
                   ? "w-6 h-6 text-white icon-shadow cursor-pointer"
-                  : "w-6 h-6 text-[#141418] icon-shadow hover:scale-120 transition-all duration-500 cursor-pointer",
+                  : "w-6 h-6 text-[#141418] icon-shadow hover:scale-120 hover:text-white transition-all duration-500 cursor-pointer",
             })}
           </button>
         ))}

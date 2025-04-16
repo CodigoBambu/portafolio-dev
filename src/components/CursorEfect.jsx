@@ -1,7 +1,8 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 const CursorEffect = () => {
   const cursorRef = useRef(null);
+  const [opacity, setOpacity] = useState(1); // Inicialmente visible
 
   useEffect(() => {
     const handleMouseMove = (event) => {
@@ -11,10 +12,15 @@ const CursorEffect = () => {
       }
     };
 
+    const intervalId = setInterval(() => {
+      setOpacity((prevOpacity) => (prevOpacity === 1 ? 0.3 : 1)); // Cambia entre 1 y 0.3
+    }, 1500); // Ajusta la velocidad del parpadeo (1500ms = 1.5 segundos)
+
     document.addEventListener("mousemove", handleMouseMove);
 
     return () => {
       document.removeEventListener("mousemove", handleMouseMove);
+      clearInterval(intervalId); // Limpia el intervalo al desmontar el componente
     };
   }, []);
 
@@ -30,7 +36,10 @@ const CursorEffect = () => {
         pointerEvents: "none",
         transform: "translate(-50%, -50%)",
         background:
-          "radial-gradient(circle, rgba(218, 218, 218, 0.350) 0%, rgba(0, 255, 255, 0) 70%)",
+          "radial-gradient(circle, rgba(218, 218, 218, 0.350) 0%, rgba(0, 255, 255, 0) 80%)",
+        zIndex: "1",
+        transition: "opacity 1s ease-in-out", 
+        opacity: opacity,
       }}
     />
   );

@@ -235,19 +235,3 @@ html.has-scroll-dragging {
 .rotate-y-180 {
   transform: rotateY(180deg);
 }
-
-@keyframes reflecting-gradient-loop {
-  0% {
-    transform: translateX(-100%);
-  }
-  50% {
-    transform: translateX(100%);
-  }
-  100% {
-    transform: translateX(150%); 
-  }
-}
-
-.animate-reflecting-gradient-loop {
-  animation: reflecting-gradient-loop 5s linear infinite;
-}

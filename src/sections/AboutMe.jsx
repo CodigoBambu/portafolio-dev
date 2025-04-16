@@ -90,7 +90,7 @@ const AboutMe = () => {
           <Logo />
         </div>
         <SocialMediaLinks />
-        <div className="mt-8 lg:flex z-10 lg:justify-between">
+        <div className="mt-8 lg:flex z-30 lg:justify-between">
           <motion.div
             variants={itemVariants}
             className="flex flex-col lg:max-w-145 lg:text-left justify-center"
